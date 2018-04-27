@@ -1,10 +1,10 @@
-##API Documentation
+## API Documentation
 
 **HOST**: api-challenge.getcrowder.com
 
-###Endpoints
+### Endpoints
 
-####List all available events
+#### List all available events
 
 **Request**
 ```
@@ -107,7 +107,7 @@ GET /event
 ]
 ```
 
-####Get Event Details
+#### Get Event Details
 
 **Request**
 ```
@@ -189,7 +189,7 @@ GET /event/{eventId}
 }
 ```
 
-####Get Sectors for Date
+#### Get Sectors for Date
 
 **Request**
 ```
@@ -230,7 +230,7 @@ GET /eventDate/{dateId}/sectors
 ]
 ```
 
-####Get Rates for Sector
+#### Get Rates for Sector
 
 **Request**
 ```
@@ -261,7 +261,7 @@ GET /sectors/{sectorId}/rates
 ]
 ```
 
-####Get Venue Details
+#### Get Venue Details
 
 **Request**
 ```
@@ -281,7 +281,7 @@ GET /venue/{venueId}
    }
 ```
 
-####Create Order
+#### Create Order
 
 **Request**
 ```

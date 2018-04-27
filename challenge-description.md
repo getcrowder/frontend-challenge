@@ -1,8 +1,8 @@
-##The Challenge
+## The Challenge
 
 Our backend engenieers have been building a powerful API to sell event tickets, but we didn't had time to create a Web Frontend, so we need your help to get this bussines spinning. Crowder's UX Team has desgined a simple to use UI, and our designers just finished working on the UI, so you will receive a set of static HTML files, with CSS and some assets.
 
-###What needs to be done
+### What needs to be done
 * List all available events
 	- Call the events endpoint to get the list of available events. It's not necessary to implement an infinit scroll, but we would love to see that.
 * Show event details and let the user pick a date, sector, rate and quantity
@@ -15,15 +15,15 @@ Our backend engenieers have been building a powerful API to sell event tickets, 
 
 **Please include a README with setup instructions, and any tests or other documentation you created as part of your solution.**
 
-###What you will get
-* The documentation of the API 
+### What you will get
+* Access to the API (read the API file)
 * HTML and CSS files so you can focus on coding (inside the design folder in this repository)
 
-###What language, framework, build tool... should I use?
+### What language, framework, build tool... should I use?
 * You may use whatever you like as long as the solution is built using React and Redux.
 
-###What else you can use
+### What else you can use
 * Anything you want, as long as it makes sense.
 
-###Found a bug in the API?
+### Found a bug in the API?
 * Create an issue in this repository and our backend engineers will fix it.
