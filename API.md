@@ -334,4 +334,47 @@ POST /order
 }
 ```
 
+### Listing and pagination
+
+In all listing endpoints pagination can be implemented using one or both of two query parameters
+
+* **max**: The maximum number to list
+* **offset**: The offset from the first result to list from 
+
+For example:
+
+```
+GET /event?max=2
+```
+
+Would return at most 2 events:
+
+```json
+[
+   {
+      "id":1,
+      "name":"Black Sabbath Cordoba",
+      "thumb":"https://cdn.boletius.com/blacksabbath/cordoba.jpg",
+      "venue":{
+         "id":1,
+         "name":"DirecTV Arena"
+      }
+   },
+   {
+      "id":2,
+      "name":"EXPULSADOS",
+      "thumb":"https://cdn.boletius.com/images/mts/thumbs/640-expulsados.jpg",
+      "venue":{
+         "id":2,
+         "name":"Teatro Vorterix"
+      }
+   }
+]
+```
+
+If, we then wanted to request the next 2 events after the last one, we would do:
+
+```
+GET /event?max=2&offset=2
+```
 
