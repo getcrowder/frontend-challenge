@@ -1,0 +1,17 @@
+{
+  "env": {
+    "node": true, 
+    "browser": true, 
+    "es6": true 
+  },
+  "parser": "babel-eslint", 
+  "extends": "airbnb",
+  "rules": {
+    "react/prefer-stateless-function": "off",
+    "import/extensions": "off",
+    "jsx-a11y/anchor-is-valid": ["error", {
+      "components": ["Link"],
+      "specialLink": ["to"]
+    }]
+  }
+}
