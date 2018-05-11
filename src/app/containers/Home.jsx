@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import RowEvent from '../components/RowEvent.jsx';
 import eventActions from '../actions/eventActions';
 
 class Home extends React.Component {
@@ -9,37 +10,17 @@ class Home extends React.Component {
     this.props.lookingEvents();
   }
 
-  splitEvents() {
-    const numberOfRows = Math.ceil((this.props.events.length || 0) / 4);
+  splitEventsOn(number) {
+    const numberOfRows = Math.ceil((this.props.events.length || 0) / number);
     const splitedEvents = [];
     for (let i = 0; i < numberOfRows; i += 1) {
-      splitedEvents.push(this.props.events.slice(i * 4, 4 * (i + 1)));
+      splitedEvents.push(this.props.events.slice(i * number, number * (i + 1)));
     }
     return splitedEvents;
   }
-  /* eslint-disable class-methods-use-this */
-  renderEvent(event) {
-    return (
-      <div className="col-sm-3 event-list">
-        <a href="event.html">
-          <img src={event.thumb} alt={event.name} width="100%" />
-        </a>
-      </div>
-    );
-  }
 
-  renderRow(rowOfEvents) {
-    return (
-      <div className="row">
-        { rowOfEvents.map(event => (
-          <div className="col-sm-3 event-list">
-            <a href="event.html">
-              <img src={event.thumb} alt={event.name} width="100%" />
-            </a>
-          </div>
-          )) }
-      </div>
-    );
+  renderRows() {
+    return this.splitEventsOn(4).map(row => <RowEvent events={row} />);
   }
 
   render() {
@@ -47,7 +28,7 @@ class Home extends React.Component {
       <div>
         <h4>Select an event</h4>
         <hr />
-        { this.splitEvents().map(this.renderRow) }
+        {this.renderRows()}
       </div>
     );
   }
