@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Redirect } from 'react-router-dom';
 
 import Root from './Root.jsx';
 import Home from './Home.jsx';
@@ -12,7 +12,7 @@ export default class App extends React.Component {
         <Root>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/home" component={Home} />
+            <Redirect to="/" />
           </Switch>
         </Root>
       </BrowserRouter>

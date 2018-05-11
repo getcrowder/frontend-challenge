@@ -1,4 +1,4 @@
-require('webpack');
+const webpack = require('webpack');
 const path = require('path');
 
 const DIST_DIR = path.resolve(__dirname, 'dist');
@@ -21,4 +21,9 @@ module.exports = {
       },
     }],
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.BACKEND_URL': JSON.stringify(process.env.BACKEND_URL || 'http://api-challenge.getcrowder.com'),
+    }),
+  ],
 };

@@ -3,7 +3,7 @@ import axios from 'axios';
 const Console = console;
 
 const http = axios.create({
-  baseURL: 'http://api-challenge.getcrowder.com',
+  baseURL: process.env.BACKEND_URL,
   timeout: 10000,
   headers: {
     Accept: 'application/json',

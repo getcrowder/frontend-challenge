@@ -4,8 +4,8 @@
   "description": "This is our challenge for Frontend Developers at @get_crowder",
   "main": "index.js",
   "scripts": {
-    "start": "SET BACKEND_URL=http://api-challenge.getcrowder.com && npm run build",
-    "build": "webpack -d && webpack-dev-server --content-base src/ --inline --hot",
+    "start": "npm run build",
+    "build": "webpack --env BACKEND_URL=http://api-challenge.getcrowder.com -d && webpack-dev-server --content-base src/ --inline --hot",
     "build:real": "webpack -d && cp src/index.html dist/index.html && webpack-dev-server --content-base src/ --inline --hot",
     "build:prod": "webpack -p && cp src/index.html dist/index.html",
     "lint": "eslint"
