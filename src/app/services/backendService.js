@@ -11,13 +11,18 @@ const http = axios.create({
   },
 });
 
+const request = path => (http.get(path)
+  .then(response => response.data)
+  .catch((error) => {
+    Console.log(error);
+    return [];
+  })
+);
+
 export default {
-  getEvents() {
-    return http.get('/event')
-      .then(response => response.data)
-      .catch((error) => {
-        Console.log(error);
-        return [];
-      });
-  },
+  getEvents: () => request('/event'),
+  getEvent: idEvent => request(`/event/${idEvent}`),
+  // getSectors: dateId => request(`/eventDate/${dateId}/sectors`),
+  getSectors: () => request('/sector'),
+  getRates: sectorId => request(`/sector/${sectorId}/rates`),
 };

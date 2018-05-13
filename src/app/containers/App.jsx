@@ -4,6 +4,7 @@ import { BrowserRouter, Redirect } from 'react-router-dom';
 
 import Root from './Root.jsx';
 import Home from './Home.jsx';
+import Event from './Event.jsx';
 
 export default class App extends React.Component {
   render() {
@@ -12,6 +13,7 @@ export default class App extends React.Component {
         <Root>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/event/:eventId" component={Event} />
             <Redirect to="/" />
           </Switch>
         </Root>

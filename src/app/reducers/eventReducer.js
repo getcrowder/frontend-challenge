@@ -1,5 +1,8 @@
 const eventReducer = (state = {
   events: [],
+  event: {
+    venue: {},
+  },
 }, action) => {
   let newState;
   switch (action.type) {
@@ -7,6 +10,12 @@ const eventReducer = (state = {
       newState = {
         ...state,
         events: action.payload,
+      };
+      break;
+    case 'GET_EVENT_FULFILLED':
+      newState = {
+        ...state,
+        event: action.payload,
       };
       break;
     default:

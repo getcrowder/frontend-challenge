@@ -7,4 +7,10 @@ export default {
       payload: BackendService.getEvents(),
     };
   },
+  getEvent(eventId) {
+    return {
+      type: 'GET_EVENT',
+      payload: BackendService.getEvent(eventId),
+    };
+  },
 };
