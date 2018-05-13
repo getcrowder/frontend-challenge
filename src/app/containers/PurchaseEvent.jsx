@@ -1,6 +1,7 @@
-import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import purchaseActions from '../actions/purchaseActions.js';
 import Field from '../components/Field.jsx';
@@ -17,6 +18,17 @@ class PurchaseEvent extends React.Component {
 
   getQuantity() {
     return [...Array(this.props.rate.max).keys()];
+  }
+
+  linkToBuy() {
+    return ({
+      path: '/order',
+      state: {
+        eventId: this.props.event.id,
+        quantity: this.props.quantity,
+        rateId: this.props.rate.id,
+      },
+    });
   }
 
   renderDates() {
@@ -80,7 +92,9 @@ class PurchaseEvent extends React.Component {
             renderOptions={() => this.renderQuantity()}
             disableWhen={() => this.getQuantity().length === 0}
           />
-          <div className="col-sm-2"> <a href="order.html" className="btn btn-primary btn-block">BUY</a> </div>
+          <div className="col-sm-2">
+            <Link to={this.linkToBuy()} className="btn btn-primary btn-block">BUY</Link>
+          </div>
         </div>
       </div>
     );
@@ -88,15 +102,16 @@ class PurchaseEvent extends React.Component {
 }
 
 PurchaseEvent.propTypes = {
+  clearPurchase: PropTypes.func.isRequired,
   event: PropTypes.objectOf(PropTypes.string).isRequired,
-  sectors: PropTypes.arrayOf(PropTypes.object).isRequired,
   rate: PropTypes.objectOf(PropTypes.string).isRequired,
   rates: PropTypes.arrayOf(PropTypes.object).isRequired,
+  sectors: PropTypes.arrayOf(PropTypes.object).isRequired,
   setDate: PropTypes.func.isRequired,
-  setSector: PropTypes.func.isRequired,
-  setRate: PropTypes.func.isRequired,
   setQuantity: PropTypes.func.isRequired,
-  clearPurchase: PropTypes.func.isRequired,
+  setRate: PropTypes.func.isRequired,
+  setSector: PropTypes.func.isRequired,
+  quantity: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -117,7 +132,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(purchaseActions.getRates(sector.id));
   },
   setRate: rate => dispatch(purchaseActions.setRate(rate)),
-  setQuantity: quantity => dispatch(purchaseActions.setQuantity(quantity)),
+  setQuantity: quantity => dispatch(purchaseActions.setQuantity(parseInt(quantity, 10))),
   clearPurchase: () => dispatch(purchaseActions.clearPurchase()),
 });
 
