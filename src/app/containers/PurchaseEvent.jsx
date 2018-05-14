@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import purchaseActions from '../actions/purchaseActions.js';
-import Field from '../components/Field.jsx';
+import SelectField from '../components/SelectField.jsx';
 
 class PurchaseEvent extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -18,17 +18,6 @@ class PurchaseEvent extends React.Component {
 
   getQuantity() {
     return [...Array(this.props.rate.max).keys()];
-  }
-
-  linkToBuy() {
-    return ({
-      path: '/order',
-      state: {
-        eventId: this.props.event.id,
-        quantity: this.props.quantity,
-        rateId: this.props.rate.id,
-      },
-    });
   }
 
   renderDates() {
@@ -52,7 +41,7 @@ class PurchaseEvent extends React.Component {
       <div>
         <h5><strong>Buy Tickets</strong></h5>
         <div className="row">
-          <Field
+          <SelectField
             rowClass="col-sm-3"
             name="date"
             onChange={(event) => {
@@ -63,7 +52,7 @@ class PurchaseEvent extends React.Component {
             renderOptions={() => this.renderDates()}
             disableWhen={() => false}
           />
-          <Field
+          <SelectField
             rowClass="col-sm-3"
             name="sector"
             onChange={(event) => {
@@ -74,7 +63,7 @@ class PurchaseEvent extends React.Component {
             renderOptions={() => this.renderSectors()}
             disableWhen={() => this.props.sectors.length === 0}
           />
-          <Field
+          <SelectField
             rowClass="col-sm-2"
             name="rate"
             onChange={(event) => {
@@ -85,7 +74,7 @@ class PurchaseEvent extends React.Component {
             renderOptions={() => this.renderRates()}
             disableWhen={() => this.props.rates.length === 0}
           />
-          <Field
+          <SelectField
             rowClass="col-sm-2"
             name="quantity"
             onChange={event => this.props.setQuantity(event.target.value)}
@@ -93,7 +82,22 @@ class PurchaseEvent extends React.Component {
             disableWhen={() => this.getQuantity().length === 0}
           />
           <div className="col-sm-2">
-            <Link to={this.linkToBuy()} className="btn btn-primary btn-block">BUY</Link>
+            <Link
+              to={{
+                pathname: '/order',
+                state: {
+                  eventId: this.props.event.id,
+                  eventName: this.props.event.name,
+                  quantity: this.props.quantity,
+                  rateId: this.props.rate.id,
+                  date: this.props.date,
+                  sector: this.props.sector,
+                  venue: this.props.event.venue,
+                },
+              }}
+              className="btn btn-primary btn-block"
+            >BUY
+            </Link>
           </div>
         </div>
       </div>
@@ -104,6 +108,8 @@ class PurchaseEvent extends React.Component {
 PurchaseEvent.propTypes = {
   clearPurchase: PropTypes.func.isRequired,
   event: PropTypes.objectOf(PropTypes.string).isRequired,
+  date: PropTypes.objectOf(PropTypes.string).isRequired,
+  sector: PropTypes.objectOf(PropTypes.string).isRequired,
   rate: PropTypes.objectOf(PropTypes.string).isRequired,
   rates: PropTypes.arrayOf(PropTypes.object).isRequired,
   sectors: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -120,6 +126,7 @@ const mapStateToProps = state => ({
   sectors: state.purchaseReducer.sectors,
   rate: state.purchaseReducer.rate,
   rates: state.purchaseReducer.rates,
+  quantity: state.purchaseReducer.quantity,
 });
 
 const mapDispatchToProps = dispatch => ({

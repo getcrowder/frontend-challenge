@@ -25,4 +25,5 @@ export default {
   // getSectors: dateId => request(`/eventDate/${dateId}/sectors`),
   getSectors: () => request('/sector'),
   getRates: sectorId => request(`/sector/${sectorId}/rates`),
+  executePay: data => http.post('/order', data).then(response => response.data),
 };

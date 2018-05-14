@@ -4,20 +4,17 @@ import PropTypes from 'prop-types';
 const Field = props => (
   <div className={props.rowClass}>
     <div className="form-group">
-      <select name={props.name} id={props.name} className="form-control" onChange={props.onChange} disabled={props.disableWhen()}>
-        <option value="-1" selected>{props.name}</option>
-        {props.renderOptions()}
-      </select>
+      <label htmlFor={props.label}>{props.label}</label>
+      <input type={props.type} className="form-control" onChange={props.onChange} />
     </div>
   </div>
 );
 
 Field.propTypes = {
   rowClass: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
   onChange: PropTypes.func.isRequired,
-  renderOptions: PropTypes.func.isRequired,
-  disableWhen: PropTypes.func.isRequired,
 };
 
 export default Field;
