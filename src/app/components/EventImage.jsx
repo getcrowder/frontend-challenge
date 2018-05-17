@@ -12,7 +12,11 @@ const EventImage = props => (
 );
 
 EventImage.propTypes = {
-  event: PropTypes.objectOf(PropTypes.string).isRequired,
+  event: PropTypes.objectOf({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    thumb: PropTypes.string,
+  }).isRequired,
 };
 
 export default EventImage;

@@ -17,7 +17,10 @@ const EventDescription = props => (
 );
 
 EventDescription.propTypes = {
-  event: PropTypes.objectOf(PropTypes.string).isRequired,
+  event: PropTypes.objectOf({
+    description: PropTypes.string,
+    venue: PropTypes.objectOf({ address: PropTypes.string }),
+  }).isRequired,
 };
 
 export default EventDescription;

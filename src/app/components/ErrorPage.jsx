@@ -19,12 +19,11 @@ const ErrorPage = props => (
         to={{
           pathname: '/order',
           state: {
-            eventId: props.location.state.eventId,
-            eventName: props.location.state.eventName,
-            quantity: props.location.state.quantity,
-            rateId: props.location.state.rateId,
+            event: props.location.state.event,
             date: props.location.state.date,
+            rate: props.location.state.rate,
             sector: props.location.state.sector,
+            quantity: props.location.state.quantity,
           },
         }}
         role="button"
@@ -37,11 +36,18 @@ const ErrorPage = props => (
 ErrorPage.propTypes = {
   location: PropTypes.objectOf({
     state: PropTypes.objectOf({
-      date: PropTypes.objectOf({ date: PropTypes.string }).isRequired,
-      eventId: PropTypes.number.isRequired,
-      eventName: PropTypes.string.isRequired,
-      quantity: PropTypes.number.isRequired,
-      rateId: PropTypes.number.isRequired,
+      date: PropTypes.objectOf({
+        date: PropTypes.string,
+      }).isRequired,
+      event: PropTypes.objectOf({
+        name: PropTypes.string,
+        thubm: PropTypes.string,
+        venue: PropTypes.objectOf({
+          name: PropTypes.string,
+          address: PropTypes.string,
+        }).isRequired,
+      }).isRequired,
+      rate: PropTypes.objectOf({ id: PropTypes.string, max: PropTypes.number, name: PropTypes.string }).isRequired,
       sector: PropTypes.objectOf({ name: PropTypes.string }).isRequired,
     }),
   }).isRequired,

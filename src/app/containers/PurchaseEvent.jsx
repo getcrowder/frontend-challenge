@@ -7,11 +7,16 @@ import purchaseActions from '../actions/purchaseActions.js';
 import SelectField from '../components/SelectField.jsx';
 
 class PurchaseEvent extends React.Component {
+  componentDidMount() {
+    this.props.clearPurchase();
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.event.id !== this.props.event.id) {
       this.props.clearPurchase();
     }
   }
+
   getDates() {
     return this.props.event.dates || [];
   }
@@ -24,16 +29,16 @@ class PurchaseEvent extends React.Component {
     return this.getDates().map(date => <option value={date.id}>{date.name} </option>);
   }
 
-  renderSectors() {
-    return this.props.sectors.map(sector => <option value={sector.id}>{sector.name} </option>);
+  renderQuantity() {
+    return this.getQuantity().map(quantity => <option value={quantity}>{quantity} </option>);
   }
 
   renderRates() {
     return this.props.rates.map(rate => <option value={rate.id}>{rate.name} </option>);
   }
 
-  renderQuantity() {
-    return this.getQuantity().map(quantity => <option value={quantity}>{quantity} </option>);
+  renderSectors() {
+    return this.props.sectors.map(sector => <option value={sector.id}>{sector.name} </option>);
   }
 
   render() {
@@ -86,13 +91,11 @@ class PurchaseEvent extends React.Component {
               to={{
                 pathname: '/order',
                 state: {
-                  eventId: this.props.event.id,
-                  eventName: this.props.event.name,
-                  quantity: this.props.quantity,
-                  rateId: this.props.rate.id,
+                  event: this.props.event,
                   date: this.props.date,
                   sector: this.props.sector,
-                  venue: this.props.event.venue,
+                  rate: this.props.rate,
+                  quantity: this.props.quantity,
                 },
               }}
               className="btn btn-primary btn-block"
@@ -107,29 +110,42 @@ class PurchaseEvent extends React.Component {
 
 PurchaseEvent.propTypes = {
   clearPurchase: PropTypes.func.isRequired,
-  event: PropTypes.objectOf(PropTypes.string).isRequired,
-  date: PropTypes.objectOf(PropTypes.string).isRequired,
-  sector: PropTypes.objectOf(PropTypes.string).isRequired,
-  rate: PropTypes.objectOf(PropTypes.string).isRequired,
-  rates: PropTypes.arrayOf(PropTypes.object).isRequired,
-  sectors: PropTypes.arrayOf(PropTypes.object).isRequired,
+  date: PropTypes.objectOf({ date: PropTypes.string }).isRequired,
+  event: PropTypes.objectOf({
+    name: PropTypes.string,
+    thubm: PropTypes.string,
+    venue: PropTypes.objectOf({ name: PropTypes.string, address: PropTypes.string }),
+  }).isRequired,
+  quantity: PropTypes.number.isRequired,
+  rate: PropTypes.objectOf({
+    id: PropTypes.string,
+    max: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
+  rates: PropTypes.arrayOf(PropTypes.objectOf({
+    id: PropTypes.string,
+    max: PropTypes.number,
+    name: PropTypes.string,
+  })).isRequired,
+  sector: PropTypes.objectOf({ name: PropTypes.string }).isRequired,
+  sectors: PropTypes.arrayOf(PropTypes.objectOf({ name: PropTypes.string })).isRequired,
   setDate: PropTypes.func.isRequired,
   setQuantity: PropTypes.func.isRequired,
   setRate: PropTypes.func.isRequired,
   setSector: PropTypes.func.isRequired,
-  quantity: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({
   date: state.purchaseReducer.date,
-  sector: state.purchaseReducer.sector,
-  sectors: state.purchaseReducer.sectors,
+  quantity: state.purchaseReducer.quantity,
   rate: state.purchaseReducer.rate,
   rates: state.purchaseReducer.rates,
-  quantity: state.purchaseReducer.quantity,
+  sector: state.purchaseReducer.sector,
+  sectors: state.purchaseReducer.sectors,
 });
 
 const mapDispatchToProps = dispatch => ({
+  clearPurchase: () => dispatch(purchaseActions.clearPurchase()),
   setDate: (date) => {
     dispatch(purchaseActions.setDate(date));
     dispatch(purchaseActions.getSectors(date.id));
@@ -140,7 +156,6 @@ const mapDispatchToProps = dispatch => ({
   },
   setRate: rate => dispatch(purchaseActions.setRate(rate)),
   setQuantity: quantity => dispatch(purchaseActions.setQuantity(parseInt(quantity, 10))),
-  clearPurchase: () => dispatch(purchaseActions.clearPurchase()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PurchaseEvent);

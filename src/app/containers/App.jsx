@@ -16,11 +16,11 @@ export default class App extends React.Component {
         <Root>
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/order" component={Order} />
-            <Route path="/event/:eventId" component={Event} />
+            <Route exact path="/event/:eventId" component={Event} />
+            <Route exact path="/order" component={Order} />
             <Route exact path="/success" component={SuccessPage} />
             <Route exact path="/error" component={ErrorPage} />
-            <Redirect to="/" />
+            <Redirect from="*" to="/" />
           </Switch>
         </Root>
       </BrowserRouter>

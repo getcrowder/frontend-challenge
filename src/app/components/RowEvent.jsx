@@ -10,7 +10,11 @@ const RowEvent = props => (
 );
 
 RowEvent.propTypes = {
-  events: PropTypes.arrayOf(PropTypes.object).isRequired,
+  events: PropTypes.arrayOf(PropTypes.objectOf({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    thumb: PropTypes.string,
+  })).isRequired,
 };
 
 export default RowEvent;

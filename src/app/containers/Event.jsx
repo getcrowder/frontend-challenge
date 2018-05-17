@@ -43,8 +43,20 @@ class Event extends React.Component {
 }
 
 Event.propTypes = {
-  match: PropTypes.objectOf(PropTypes.string).isRequired,
-  event: PropTypes.objectOf(PropTypes.string).isRequired,
+  match: PropTypes.objectOf({
+    params: PropTypes.objectOf({
+      eventId: PropTypes.number,
+    }),
+  }).isRequired,
+  event: PropTypes.objectOf({
+    image: PropTypes.string,
+    name: PropTypes.string,
+    similarEvents: PropTypes.arrayOf(PropTypes.objectOf({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      thumb: PropTypes.string,
+    })),
+  }).isRequired,
   getEvent: PropTypes.func.isRequired,
 };
 
