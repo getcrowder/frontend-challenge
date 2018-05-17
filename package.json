@@ -6,9 +6,8 @@
   "scripts": {
     "start": "npm run build",
     "build": "webpack --env BACKEND_URL=http://api-challenge.getcrowder.com -d && webpack-dev-server --content-base src/ --inline --hot",
-    "build:real": "webpack -d && cp src/index.html dist/index.html && webpack-dev-server --content-base src/ --inline --hot",
-    "build:prod": "webpack -p && cp src/index.html dist/index.html",
-    "lint": "eslint"
+    "build:prod": "webpack -p && cp src/index.html dist/index.html && mkdir -p dist/static && cp -R src/static/* dist/static",
+    "lint": "eslint src/app/*"
   },
   "repository": {
     "type": "git",
