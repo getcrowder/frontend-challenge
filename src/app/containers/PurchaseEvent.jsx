@@ -7,10 +7,6 @@ import purchaseActions from '../actions/purchaseActions.js';
 import SelectField from '../components/SelectField.jsx';
 
 class PurchaseEvent extends React.Component {
-  componentDidMount() {
-    this.props.clearPurchase();
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.event.id !== this.props.event.id) {
       this.props.clearPurchase();
@@ -99,6 +95,7 @@ class PurchaseEvent extends React.Component {
                 },
               }}
               className="btn btn-primary btn-block"
+              disabled={(() => this.props.quantity === 0)()}
             >BUY
             </Link>
           </div>
