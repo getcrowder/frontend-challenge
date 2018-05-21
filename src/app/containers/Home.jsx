@@ -1,3 +1,4 @@
+import InfiniteScroll from 'react-infinite-scroll-component';
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -7,9 +8,12 @@ import eventActions from '../actions/eventActions';
 
 class Home extends React.Component {
   componentDidMount() {
-    this.props.lookingEvents();
+    this.props.lookingEvents(0);
   }
 
+  nextEvents() {
+    this.props.lookingEvents(this.props.currentPage);
+  }
   splitEventsOn(number) {
     const numberOfRows = Math.ceil((this.props.events.length || 0) / number);
     const splitedEvents = [];
@@ -20,7 +24,20 @@ class Home extends React.Component {
   }
 
   renderRows() {
-    return this.splitEventsOn(4).map(row => <RowEvent events={row} />);
+    return (
+      <InfiniteScroll
+        dataLength={this.props.events.length}
+        next={() => this.nextEvents()}
+        hasMore={this.props.hasMoreEvents}
+        loader={<h4>Loading...</h4>}
+        endMessage={
+          <p style={{ textAlign: 'center' }}>
+            <b>Hasta ahora no tenemos mas eventos</b>
+          </p>
+        }
+      >
+        {this.splitEventsOn(4).map(row => <RowEvent events={row} />)}
+      </InfiniteScroll>);
   }
 
   render() {
@@ -35,20 +52,24 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
+  currentPage: PropTypes.number.isRequired,
   events: PropTypes.arrayOf(PropTypes.objectOf({
     id: PropTypes.number,
     name: PropTypes.string,
     thumb: PropTypes.string,
   })).isRequired,
+  hasMoreEvents: PropTypes.bool.isRequired,
   lookingEvents: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   events: state.eventReducer.events,
+  currentPage: state.eventReducer.currentPage,
+  hasMoreEvents: state.eventReducer.hasMoreEvents,
 });
 
 const mapDispatchToProps = dispatch => ({
-  lookingEvents: () => dispatch(eventActions.lookingEvents()),
+  lookingEvents: page => dispatch(eventActions.lookingEvents(page)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

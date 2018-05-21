@@ -20,7 +20,7 @@ const request = path => (http.get(path)
 );
 
 export default {
-  getEvents: () => request('/event'),
+  getEvents: (max, offset) => request(`/event?max=${max}&offset=${offset}`),
   getEvent: idEvent => request(`/event/${idEvent}`),
   // getSectors: dateId => request(`/eventDate/${dateId}/sectors`),
   getSectors: () => request('/sector'),

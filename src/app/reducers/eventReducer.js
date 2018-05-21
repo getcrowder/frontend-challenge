@@ -1,15 +1,17 @@
 const eventReducer = (state = {
+  currentPage: 0,
+  event: { venue: {} },
   events: [],
-  event: {
-    venue: {},
-  },
+  hasMoreEvents: true,
 }, action) => {
   let newState;
   switch (action.type) {
     case 'LOOKING_EVENTS_FULFILLED':
       newState = {
         ...state,
-        events: action.payload,
+        currentPage: state.currentPage + 1,
+        events: [...state.events, ...action.payload],
+        hasMoreEvents: action.payload.length !== 0,
       };
       break;
     case 'GET_EVENT_FULFILLED':

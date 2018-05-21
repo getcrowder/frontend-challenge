@@ -1,10 +1,10 @@
 import BackendService from '../services/backendService';
 
 export default {
-  lookingEvents() {
+  lookingEvents(page) {
     return {
       type: 'LOOKING_EVENTS',
-      payload: BackendService.getEvents(),
+      payload: BackendService.getEvents(8, page * 8),
     };
   },
   getEvent(eventId) {
