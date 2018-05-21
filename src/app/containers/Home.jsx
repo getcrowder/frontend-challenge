@@ -8,7 +8,9 @@ import eventActions from '../actions/eventActions';
 
 class Home extends React.Component {
   componentDidMount() {
-    this.props.lookingEvents(0);
+    if (this.props.events.length === 0) {
+      this.props.lookingEvents(0);
+    }
   }
 
   nextEvents() {

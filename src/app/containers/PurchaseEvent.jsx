@@ -7,6 +7,10 @@ import purchaseActions from '../actions/purchaseActions.js';
 import SelectField from '../components/SelectField.jsx';
 
 class PurchaseEvent extends React.Component {
+  componentDidMount() {
+    this.props.clearPurchase();
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.event.id !== this.props.event.id) {
       this.props.clearPurchase();
