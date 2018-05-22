@@ -1,31 +1,15 @@
-# Frontend Challenge
+# Uso del front
+El proyecto se encuentra utilizando _React_ y _Redux_, junto con _axios_ para realizar los request al backend.
 
-This is our challenge for Frontend Developers at @get_crowder
+## Requerimientos
+* Nodejs 8
+* npm | yarn
 
-#### About the challenge
+## Correr en desarrollo
+Se esta utilizando una variable de entrono que define en donde se encuentra la ruta del backend.
+El env es __BACKEND_URL__
 
-We'll give you some requirements that must be done and for which you'll be evaluated, but you're free to choose a solution method.
+Para correr el proyecto:
 
-#### What we expect to learn from you with this challenge:
+> yarn install && yarn run start
 
-* Your work style.
-* How you think and solve problems.
-* How you communicate.
-
-#### Next steps
-
-* Fork this repository to your personal account.
-* Follow the instructions in the challenge-description file.
-* Solve the challenge in the best way you can.
-* Send us a PR with your solution.
-
-#### How to face the challenge
-
-* You can use any resource you like, we do too.
-* There are no rules in terms of libraries you can add to the project, but keep in mind we will evaluate coherence
-* Think, then code. We will evaluate not only the code, but how you faced the problem and the solution you came up with.
-* Write code that is clean and easy to read. Code that "just works" doesn't work for us.
-
-#### Doubts?
-
-Do you have in doubt related to the process? Open an issue and we'll be happy to help.
