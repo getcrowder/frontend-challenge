@@ -4,7 +4,7 @@ export default {
   lookingEvents(page) {
     return {
       type: 'LOOKING_EVENTS',
-      payload: BackendService.getEvents(8, page * 8),
+      payload: BackendService.getEvents(16, page * 16),
     };
   },
   getEvent(eventId) {

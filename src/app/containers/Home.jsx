@@ -1,7 +1,7 @@
-import InfiniteScroll from 'react-infinite-scroll-component';
-import React from 'react';
 import { connect } from 'react-redux';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import RowEvent from '../components/RowEvent.jsx';
 import eventActions from '../actions/eventActions';
@@ -16,6 +16,7 @@ class Home extends React.Component {
   nextEvents() {
     this.props.lookingEvents(this.props.currentPage);
   }
+
   splitEventsOn(number) {
     const numberOfRows = Math.ceil((this.props.events.length || 0) / number);
     const splitedEvents = [];
@@ -34,9 +35,10 @@ class Home extends React.Component {
         loader={<h4>Loading...</h4>}
         endMessage={
           <p style={{ textAlign: 'center' }}>
-            <b>Hasta ahora no tenemos mas eventos</b>
+            <b>So far we do not have more events</b>
           </p>
         }
+        style={{ overflow: false }}
       >
         {this.splitEventsOn(4).map(row => <RowEvent events={row} />)}
       </InfiniteScroll>);

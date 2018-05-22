@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-
 import Field from '../components/Field.jsx';
 import orderActions from '../actions/orderActions.js';
 

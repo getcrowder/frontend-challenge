@@ -1,6 +1,6 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 import EventDescription from '../components/EventDescription.jsx';
 import PurchaseEvent from '../containers/PurchaseEvent.jsx';

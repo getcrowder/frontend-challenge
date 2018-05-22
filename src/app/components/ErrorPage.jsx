@@ -47,7 +47,11 @@ ErrorPage.propTypes = {
           address: PropTypes.string,
         }).isRequired,
       }).isRequired,
-      rate: PropTypes.objectOf({ id: PropTypes.string, max: PropTypes.number, name: PropTypes.string }).isRequired,
+      rate: PropTypes.objectOf({
+        id: PropTypes.string,
+        max: PropTypes.number,
+        name: PropTypes.string,
+      }).isRequired,
       sector: PropTypes.objectOf({ name: PropTypes.string }).isRequired,
     }),
   }).isRequired,
